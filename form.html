@@ -1,12 +1,12 @@
 <head>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-
+  
 <script>
     $(document).ready(  () => {
         $("#name").keyup( () => {
             $.post("/aj", {"suggest": $("#name").val()} , (response) => {
-                (document.getElementById("inserted").innerHTML = response)
+                document.getElementById("inserted").innerHTML = response
             });
         });
     });
@@ -16,7 +16,6 @@
 
 <body>
 <div style="text-align: center">
-  
         <input  id="name" type="text" placeholder="names">
         <p id="inserted"></p>
 </div>
