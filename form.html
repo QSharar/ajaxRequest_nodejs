@@ -1,37 +1,23 @@
 <head>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  
 <script>
-    
-    function ajCall() {
-       
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function () {
-            if(this.readyState == 4 && this.status == 200){
-                document.getElementById("inserted").innerHTML = this.responseText;
-                console.log(this.responseText);
-            }
-        };
-        xhttp.open("POST", "/aj", true);
-        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xhttp.send("fname=Henry&lname=Ford");
-
-        
-    }
-
-</script>  
-
-
+    $(document).ready(  () => {
+        $("#name").keyup( () => {
+            $.post("/aj", {"suggest": $("#name").val()} , (response) => {
+                document.getElementById("inserted").innerHTML = response
+            });
+        });
+    });
+</script>
 
 </head>
 
 <body>
 <div style="text-align: center">
-    <form>
-        <input id="name" type="text" value="name" placeholder="Your Name"><br>
-      
-        <button onclick="ajCall(); return false;">Submit</button>
-       
-    </form>
-     <p id="inserted"></p>
+        <input  id="name" type="text" placeholder="names">
+        <p id="inserted"></p>
 </div>
 <body>
 
