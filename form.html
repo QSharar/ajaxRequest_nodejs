@@ -1,23 +1,38 @@
 <head>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  
-<script>
-    $(document).ready( () => {
-        $("#name").keyup( () => {
-            $.post("/aj", {"suggest": $("#name").val()} , (response) => {
-                document.getElementById("inserted").innerHTML = response
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <script>
+        $(document).ready(() => {
+            $("#name").keyup(() => {
+                const postPromise = new Promise((resolve, reject) => {
+                    $.post("/aj", { "suggest": $("#name").val() }, (response) => {
+                        resolve(response);
+                    });
+                }).then((response) => {
+                    $("ul").empty();
+                    $.each(response, (ind, val) => $("ul").append("<p class='well'>" + val));
+                });
+
             });
         });
-    });
-</script>
-
+    </script>
 </head>
 
 <body>
-<div style="text-align: center">
-        <input  id="name" type="text" placeholder="names">
-        <p id="inserted"></p>
-</div>
-<body>
+    <div class="row search">
+        <div class="col-sm-8 col-sm-offset-2">
+            <input class="form-control" id="name" type="text" placeholder="Search Countries">
+            <br>
+        </div>
+    </div>
 
+    <div class="container">
+        <ul>
+            </p>
+        </ul>
+
+    </div>
+
+    <body>
