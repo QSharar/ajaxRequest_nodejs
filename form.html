@@ -6,7 +6,7 @@
     <script>
         $(document).ready(() => {
             $("#name").keyup(() => {
-                const postPromise = new Promise((resolve, reject) => {
+                new Promise((resolve, reject) => {
                     $.post("/aj", { "suggest": $("#name").val() }, (response) => {
                         resolve(response);
                     });
